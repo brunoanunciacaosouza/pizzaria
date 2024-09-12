@@ -5,6 +5,7 @@ import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 
 import { CreteCategoryController } from "./controllers/category/CreateCategoryController";
+import { ListCategoryController } from "./controllers/category/ListCategoryController";
 
 import isAuthenticated from "./middlewares/isAuthenticated";
 
@@ -21,5 +22,6 @@ router.post(
   isAuthenticated,
   new CreteCategoryController().handle
 );
+router.get("/categories", isAuthenticated, new ListCategoryController().handle);
 
 export default router;
