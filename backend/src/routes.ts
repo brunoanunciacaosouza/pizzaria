@@ -12,6 +12,7 @@ import { CreateProductController } from "./controllers/product/CreateProductCont
 import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
 
 import { CreateOrderController } from "./controllers/order/CreateOrderController";
+import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
 
 import uploadConfig from "./config/multer";
 import isAuthenticated from "./middlewares/isAuthenticated";
@@ -26,11 +27,7 @@ router.post("/session", new AuthUserController().handle);
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 
 // routes category
-router.post(
-  "/category",
-  isAuthenticated,
-  new CreteCategoryController().handle
-);
+router.post("/category", isAuthenticated, new CreteCategoryController().handle);
 router.get("/category", isAuthenticated, new ListCategoryController().handle);
 
 // routes product
@@ -48,5 +45,6 @@ router.get(
 
 // routes order
 router.post("/order", isAuthenticated, new CreateOrderController().handle);
+router.delete("/order", isAuthenticated, new RemoveOrderController().handle);
 
 export default router;
