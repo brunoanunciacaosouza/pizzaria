@@ -11,38 +11,42 @@ import { ListCategoryController } from "./controllers/category/ListCategoryContr
 import { CreateProductController } from "./controllers/product/CreateProductController";
 import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
 
-import isAuthenticated from "./middlewares/isAuthenticated";
+import { CreateOrderController } from "./controllers/order/CreateOrderController";
 
 import uploadConfig from "./config/multer";
+import isAuthenticated from "./middlewares/isAuthenticated";
 
 const router = Router();
 
 const upload = multer(uploadConfig.upload("./tmp"));
 
 // routes user
-router.post("/users", new CreateUserController().handle);
+router.post("/user", new CreateUserController().handle);
 router.post("/session", new AuthUserController().handle);
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 
 // routes category
 router.post(
-  "/categories",
+  "/category",
   isAuthenticated,
   new CreteCategoryController().handle
 );
-router.get("/categories", isAuthenticated, new ListCategoryController().handle);
+router.get("/category", isAuthenticated, new ListCategoryController().handle);
 
 // routes product
 router.post(
-  "/products",
+  "/product",
   isAuthenticated,
   upload.single("file"),
   new CreateProductController().handle
 );
 router.get(
-  "/categories/product",
+  "/category/product",
   isAuthenticated,
   new ListByCategoryController().handle
 );
+
+// routes order
+router.post("/order", isAuthenticated, new CreateOrderController().handle);
 
 export default router;
