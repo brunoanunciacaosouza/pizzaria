@@ -15,6 +15,7 @@ import { CreateOrderController } from "./controllers/order/CreateOrderController
 import { ListOrdersController } from "./controllers/order/ListOrdersController";
 import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
 import { SendOderController } from "./controllers/order/SendOrderController";
+import { DetailOrderController } from "./controllers/order/DetailOrderController";
 
 import { AddItemController } from "./controllers/order/AddItemController";
 import { RemoveItemController } from "./controllers/order/RemoveItemController";
@@ -51,6 +52,11 @@ router.get(
 // routes order
 router.post("/order", isAuthenticated, new CreateOrderController().handle);
 router.get("/orders", isAuthenticated, new ListOrdersController().handle);
+router.get(
+  "/order/detail",
+  isAuthenticated,
+  new DetailOrderController().handle
+);
 router.put("/order/send", isAuthenticated, new SendOderController().handle);
 router.delete("/order", isAuthenticated, new RemoveOrderController().handle);
 
