@@ -13,6 +13,8 @@ import { ListByCategoryController } from "./controllers/product/ListByCategoryCo
 
 import { CreateOrderController } from "./controllers/order/CreateOrderController";
 import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
+import { SendOderController } from "./controllers/order/SendOrderController";
+
 import { AddItemController } from "./controllers/order/AddItemController";
 import { RemoveItemController } from "./controllers/order/RemoveItemController";
 
@@ -47,10 +49,15 @@ router.get(
 
 // routes order
 router.post("/order", isAuthenticated, new CreateOrderController().handle);
+router.put("/order/send", isAuthenticated, new SendOderController().handle);
 router.delete("/order", isAuthenticated, new RemoveOrderController().handle);
 
 // routes item
 router.post("/order/add", isAuthenticated, new AddItemController().handle);
-router.delete("/order/remove", isAuthenticated, new RemoveItemController().handle);
+router.delete(
+  "/order/remove",
+  isAuthenticated,
+  new RemoveItemController().handle
+);
 
 export default router;
