@@ -1,17 +1,25 @@
+import logoImg from "../../../public/logo.svg";
 import Image from "next/image";
+import styles from "../page.module.scss";
 import Link from "next/link";
 
-import logoImg from "../../public/logo.svg";
-import styles from "./page.module.scss";
-
-export default function Page() {
+export default function SignUp() {
   return (
     <>
       <div className={styles.containerCenter}>
         <Image src={logoImg} alt="Logo da pizzaria" />
 
         <section className={styles.login}>
+          <h1>Criando sua conta</h1>
           <form>
+            <input
+              type="name"
+              required
+              name="name"
+              placeholder="Digite o seu nome..."
+              className={styles.input}
+            />
+
             <input
               type="email"
               required
@@ -31,8 +39,8 @@ export default function Page() {
             <button type="submit">Acessar</button>
           </form>
 
-          <Link href="/signup" className={styles.text}>
-            Não possui um conta? Cadastre-se
+          <Link href="/" className={styles.text}>
+            Já possui uma conta? Faça o login
           </Link>
         </section>
       </div>
