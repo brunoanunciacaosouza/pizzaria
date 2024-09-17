@@ -1,3 +1,9 @@
+import Orders from "./components/Orders";
+
 export default function Dashboard() {
-  return <div>Pagina de Dashboard</div>;
+  return (
+    <>
+      <Orders />
+    </>
+  );
 }
