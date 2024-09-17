@@ -5,6 +5,7 @@ import logoImg from "../../public/logo.svg";
 import styles from "./page.module.scss";
 import { api } from "@/services/api";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 export default function Page() {
   async function handleLogin(formData: FormData) {
@@ -26,6 +27,15 @@ export default function Page() {
       if (!response.data.token) {
         return;
       }
+
+      const expiresTime = 60 * 60 * 24 * 7 * 1000;
+
+      cookies().set("session", response.data.token, {
+        maxAge: expiresTime,
+        path: "/",
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production",
+      });
     } catch (error) {
       console.log(error);
     }
