@@ -8,6 +8,7 @@ import { LogOutIcon } from "lucide-react";
 import logoImg from "../../../../../public/logo.svg";
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Header() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Header() {
       path: "/",
     });
 
+    toast.success("Logout feito com sucesso!");
     router.replace("/");
   }
 

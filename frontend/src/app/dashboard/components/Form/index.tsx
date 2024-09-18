@@ -7,6 +7,8 @@ import Image from "next/image";
 import Button from "../Button";
 import { api } from "@/services/api";
 import { getCookieCliente } from "@/lib/cookieClient";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface CategoryProps {
   id: string;
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export default function Form({ categories }: Props) {
+  const router = useRouter();
   const [image, setImage] = useState<File>();
   const [previewImage, setPreviewImage] = useState("");
 
@@ -28,7 +31,7 @@ export default function Form({ categories }: Props) {
       const image = event.target.files[0];
 
       if (image.type !== "image/png" && image.type !== "image/jpeg") {
-        console.log("Formato proibido");
+        toast.warning("Apenas imagens nos formatos png e jpeg");
         return;
       }
 
@@ -44,6 +47,7 @@ export default function Form({ categories }: Props) {
     const description = formData.get("description");
 
     if (!categoryIndex || !name || !price || !description || !image) {
+      toast.warning("Preencha todos os campos");
       return;
     }
 
@@ -65,8 +69,12 @@ export default function Form({ categories }: Props) {
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Falha ao cadastrar com sucesso");
         return;
       });
+
+    toast.success("Produto cadastrado com sucesso");
+    router.push("/dashboard");
   }
 
   return (
