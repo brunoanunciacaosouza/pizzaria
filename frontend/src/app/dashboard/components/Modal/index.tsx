@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import styles from "./style.module.scss";
 import { useContext } from "react";
 import { OrderContext } from "@/provider/order";
+import { calculateTotalOrder } from "@/lib/helper";
 
 export default function ModalOrder() {
   const { order, onRequestClose, finishOrder } = useContext(OrderContext);
@@ -34,11 +35,22 @@ export default function ModalOrder() {
 
           {order.map((item) => (
             <section className={styles.item} key={item.id}>
+              <img
+                src={`http://localhost:3333/files/${item.product.banner}`}
+                width={120}
+                height={120}
+                className={styles.img}
+              />
               <span>
-                {item.amount} - <b>{item.product.name}</b>
+                Qtd: {item.amount} - <b>{item.product.name}</b> - R${" "}
+                {parseFloat(item.product.price) * parseInt(item.amount)}
               </span>
             </section>
           ))}
+
+          <h3 className={styles.total}>
+            Valor total R$: {calculateTotalOrder(order).toFixed(2)}
+          </h3>
 
           <button className={styles.buttonOrder} onClick={handleFinishOrder}>
             Concluir pedido
