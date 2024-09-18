@@ -12,6 +12,7 @@ class SendOrderService {
       },
       data: {
         draft: false,
+        status: false,
       },
     });
 
