@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sujeito Pizza - A melhor pizzaria",
+  title: "Borcelle Pizzaria - A melhor pizzaria",
   description: "A melhor pizzaria do Brasil",
 };
 

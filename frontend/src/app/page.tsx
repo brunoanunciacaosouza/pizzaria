@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import logoImg from "../../public/logo.svg";
+import logoImg from "../../public/logo.png";
 import styles from "./page.module.scss";
 import { api } from "@/services/api";
 import { redirect } from "next/navigation";
@@ -46,7 +46,9 @@ export default function Page() {
   return (
     <>
       <div className={styles.containerCenter}>
-        <Image src={logoImg} alt="Logo da pizzaria" width={309} priority />
+        <div className={styles.containerImage} >
+          <Image src={logoImg} alt="Logo da pizzaria" width={309} height={200} priority className={styles.containerLogo}/>
+        </div>
 
         <section className={styles.login}>
           <form action={handleLogin}>

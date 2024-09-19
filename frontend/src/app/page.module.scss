@@ -67,6 +67,18 @@
   text-decoration: none;
 }
 
+.containerImage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerLogo{
+  display: block;
+  height: 100px;
+  object-fit: cover;
+}
+
 @media (max-width: 620px) {
   .login {
     width: 90%;

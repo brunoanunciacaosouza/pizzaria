@@ -1,4 +1,4 @@
-import logoImg from "../../../public/logo.svg";
+import logoImg from "../../../public/logo.png";
 import Image from "next/image";
 import styles from "../page.module.scss";
 import Link from "next/link";
@@ -33,7 +33,9 @@ export default function SignUp() {
   return (
     <>
       <div className={styles.containerCenter}>
-        <Image src={logoImg} alt="Logo da pizzaria" />
+      <div className={styles.containerImage} >
+          <Image src={logoImg} alt="Logo da pizzaria" width={309} height={200} priority className={styles.containerLogo}/>
+        </div>
 
         <section className={styles.login}>
           <h1>Criando sua conta</h1>

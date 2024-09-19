@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍕 Borcelle Pizzaria 🍕
 
-## Getting Started
+## Conteúdo
+* [Sobre a aplicação](#sobre-a-aplicação)
+* [Tecnologias](#hammer_and_wrench-tecnologias)
+* [Iniciando a Aplicação](#car-Iniciando-a-aplicação)
+* [Screenshots](#camera_flash-screenshots)
+* [Licença](#balance_scale-licença)
+* [Contato](#email-contato)
 
-First, run the development server:
+## Sobre a aplicação
+Aplicação completa para pizzaria desenvolvida em 3 camadas, durante o curso [Projeto Completo NodeJS, React, React Native, TypeScript](https://www.udemy.com/course/dev-fullstack/), do prof. Matheus Fraga.<br />
+1. __Back-end__: Desenvolvido em Node.JS com Typescript, utilizando Prisma com banco de dados PostgreSQL.
+2. __Front-end__: Permite cadastrar produtos, categorias e fechar mesas. Desenvolvido em React com Next, Typescript e SASS.
+3. __Mobile__: Permite lançar o consumo das mesas. Desenvolvido em React Native com Expo e Typescript.
 
+## :hammer_and_wrench: Tecnologias
+* Back-end
+  * __Node.js__ com Typescript
+  * __Prisma ORM__ para acessar o banco de dados
+  * Autenticação __JTW__
+  * __Multer__ para upload de imagens
+* Front-end
+  * __React__ com __Next__ e Typescript
+  * __Nookies__ para armazenar cookies
+  * __SASS__ para estilização
+* Mobile
+  * __React Native__ com Expo e Typescript
+  * __AsyncStorage__ para armazenamento de chaves/valores
+
+## :car: Iniciando a aplicação
+Baixe o repositório com git clone e entre na pasta do projeto.
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git@github.com:brunoanunciacaosouza/pizzaria.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### __Back-end__
+Na pasta backend, renomeie o arquivo _.env.local-example_ para _.env.local_<br/>
+Informe a URL da API na variável __DATABASE_URL__.<br/>
+Informe a palavra secreta da API na variável __JWT_SECRET__<br/>
+```bash
+# Instale as dependências
+$ yarn
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Para iniciar a aplicação na porta 3333
+$ yarn dev
+```
+### __Front-end__
+  Na pasta web, informe o IP da aplicação back-end no arquivo _src/services/api.ts_<br/>
+```bash
+# Instale as dependências
+$ yarn
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Para iniciar a aplicação na porta 3000
+$ yarn dev
+```
+### __Mobile__
+  Na pasta web, informe o IP da aplicação back-end no arquivo _src/services/api.ts_<br/>
+```bash
+# Instale as dependências
+$ yarn
 
-## Learn More
+# Para iniciar a aplicação
+$ expo start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## :camera_flash: Screenshots
+<img src="./src/assets/preview.gif?raw=true" width="70%">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## :balance_scale: Licença
+Este projeto está licenciado sob a [licença MIT](LICENSE).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## :email: Contato
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+E-mail: [**bruno_a_souza@outlook.com**](mailto:luiiz.silverio@gmail.com)

@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import { LogOutIcon } from "lucide-react";
 
-import logoImg from "../../../../../public/logo.svg";
+import logoImg from "../../../../../public/logo.png";
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -29,10 +29,11 @@ export default function Header() {
           <Image
             src={logoImg}
             alt="Logo Sujeito Pizza"
-            width={198}
-            height={68}
+            width={200}
+            height={200}
             quality={100}
             priority={true}
+            className={styles.headerLogo}
           />
         </Link>
 
