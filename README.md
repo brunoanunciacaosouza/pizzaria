@@ -65,11 +65,11 @@ $ expo start
 ```
 
 ## :camera_flash: Screenshots
-<img src="./src/assets/preview.gif?raw=true" width="70%">
+<img src="./preview.gif?raw=true" width="70%">
 
 ## :balance_scale: Licença
 Este projeto está licenciado sob a [licença MIT](LICENSE).
 
 ## :email: Contato
 
-E-mail: [**bruno_a_souza@outlook.com**](mailto:luiiz.silverio@gmail.com)
+E-mail: [**bruno_a_souza@outlook.com**](mailto:bruno_a_souza@outlook.com)
