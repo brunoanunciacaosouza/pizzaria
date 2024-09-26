@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "../services/api";
 
@@ -6,6 +6,9 @@ type AuthContextData = {
   user: UserProps;
   isAuthenticated: boolean;
   signIn: (credentials: SignInProps) => Promise<void>;
+  singOut: () => Promise<void>;
+  loadingAuth: boolean;
+  loading: boolean;
 };
 
 type UserProps = {
@@ -33,9 +36,34 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     email: "",
     token: "",
   });
+  const [loading, setLoading] = useState(true);
   const [loadingAuth, setLoadingAuth] = useState(false);
 
   const isAuthenticated = !!user.name;
+
+  useEffect(() => {
+    async function getUser() {
+      const userInfo = await AsyncStorage.getItem("@borcellePizzaria");
+      let hasUser: UserProps = JSON.parse(userInfo || "{}");
+
+      if (Object.keys(hasUser).length > 0) {
+        api.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${hasUser.token}`;
+
+        setUser({
+          id: hasUser?.id,
+          name: hasUser?.name,
+          email: hasUser?.email,
+          token: hasUser?.token,
+        });
+      }
+
+      setLoading(false);
+    }
+
+    getUser();
+  }, []);
 
   async function signIn({ email, password }: SignInProps) {
     setLoadingAuth(true);
@@ -62,14 +90,29 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         email,
         token,
       });
+      
+      setLoadingAuth(false);
     } catch (error) {
       console.log(error);
       setLoadingAuth(false);
     }
   }
 
+  async function singOut() {
+    await AsyncStorage.clear().then(() => {
+      setUser({
+        id: "",
+        name: "",
+        email: "",
+        token: "",
+      });
+    });
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, signIn, loading, loadingAuth, singOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
