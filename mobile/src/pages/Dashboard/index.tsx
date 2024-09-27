@@ -9,21 +9,33 @@ import {
 } from "react-native";
 import { NativeStackNavigationProp } from "react-native-screens/lib/typescript/native-stack/types";
 import { StackParamsList } from "../../routes/app.routes";
+import { api } from "../../services/api";
 
 export default function Dashboard() {
   const navigation =
     useNavigation<NativeStackNavigationProp<StackParamsList>>();
   const [number, setNumber] = useState("");
+  const [name, setName] = useState("");
 
   async function openOder() {
     if (number === "") {
       return;
     }
+    console.log(number);
+
+    const response = await api.post("/order", {
+      table: Number(number),
+      name: name,
+    });
 
     navigation.navigate("Order", {
       number: number,
-      order_id: "",
+      name: name,
+      order_id: response.data.id,
     });
+
+    setNumber("");
+    setName("");
   }
 
   return (
@@ -37,6 +49,14 @@ export default function Dashboard() {
         keyboardType="numeric"
         value={number}
         onChangeText={setNumber}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome do cliente (opcional)"
+        placeholderTextColor="#f0f0f0"
+        value={name}
+        onChangeText={setName}
       />
 
       <TouchableOpacity style={styles.button} onPress={openOder}>
@@ -69,6 +89,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 22,
     color: "#fff",
+    marginBottom: 12,
   },
   button: {
     width: "80%",
