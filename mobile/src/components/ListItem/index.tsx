@@ -9,16 +9,26 @@ interface ItemProps {
     name: string;
     amount: string | number;
   };
+  deleteItem: (item_id: string) => void;
 }
 
-export default function ListItem({ data }: ItemProps) {
+export default function ListItem({ data, deleteItem }: ItemProps) {
+  function handleDeleteItem() {
+    deleteItem(data.id);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.item}>
         Qtde: {data.amount}x - {data.name}
       </Text>
       <TouchableOpacity>
-        <Feather name="trash-2" size={36} color="#ff3f4b" />
+        <Feather
+          name="trash-2"
+          size={36}
+          color="#ff3f4b"
+          onPress={() => handleDeleteItem()}
+        />
       </TouchableOpacity>
     </View>
   );
