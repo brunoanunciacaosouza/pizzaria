@@ -10,7 +10,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
-import ModalPicker from "../../components/ModalPicker";
+import { ModalPicker } from "../../components/ModalPicker";
 
 type RouteDetailParams = {
   Order: {
@@ -47,7 +47,7 @@ export default function Order() {
   const [productSelected, setProductSelected] = useState<
     ProductProps | undefined
   >();
-  const [productModalVisible, setProductModalVisible] = useState(false);
+  const [modalProductVisible, setModalProductVisible] = useState(false);
 
   useEffect(() => {
     async function loadInfo() {
@@ -92,6 +92,10 @@ export default function Order() {
     setCategorySelected(item);
   }
 
+  function handleChangeProduct(item: ProductProps) {
+    setProductSelected(item);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -113,7 +117,10 @@ export default function Order() {
       )}
 
       {products.length !== 0 && (
-        <TouchableOpacity style={styles.input}>
+        <TouchableOpacity
+          style={styles.input}
+          onPress={() => setModalProductVisible(true)}
+        >
           <Text style={styles.inputText}>{productSelected?.name}</Text>
         </TouchableOpacity>
       )}
@@ -148,6 +155,18 @@ export default function Order() {
           handleCloseModal={() => setModalCategoryVisible(false)}
           options={category}
           selectedItem={handleChangeCategory}
+        />
+      </Modal>
+
+      <Modal
+        transparent={true}
+        visible={modalProductVisible}
+        animationType="fade"
+      >
+        <ModalPicker
+          handleCloseModal={() => setModalProductVisible(false)}
+          options={products}
+          selectedItem={handleChangeProduct}
         />
       </Modal>
     </View>
