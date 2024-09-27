@@ -107,8 +107,21 @@ export default function Order() {
     setProductSelected(item);
   }
 
-  async function handleAdd(){
+  async function handleAdd() {
+    const response = await api.post("/order/add", {
+      order_id: route.params?.order_id,
+      product_id: productSelected?.id,
+      amount: Number(amount),
+    });
 
+    let data = {
+      id: response.data.id,
+      product_id: productSelected?.id as string,
+      name: productSelected?.name as string,
+      amount: amount,
+    };
+
+    setItems((oldArray) => [...oldArray, data]);
   }
 
   return (
@@ -117,9 +130,11 @@ export default function Order() {
         <Text style={styles.title}>
           Mesa: {route?.params?.number} - {route?.params.name}
         </Text>
-        <TouchableOpacity onPress={handleCloseOder}>
-          <Feather name="trash-2" size={36} color="#ff3f4b" />
-        </TouchableOpacity>
+        {items.length === 0 && (
+          <TouchableOpacity onPress={handleCloseOder}>
+            <Feather name="trash-2" size={36} color="#ff3f4b" />
+          </TouchableOpacity>
+        )}
       </View>
 
       {category.length !== 0 && (
@@ -152,7 +167,7 @@ export default function Order() {
       </View>
 
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.buttonAdd}>
+        <TouchableOpacity style={styles.buttonAdd} onPress={() => handleAdd()}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
 
@@ -164,9 +179,8 @@ export default function Order() {
             },
           ]}
           disabled={items.length === 0}
-          onPress={() => handleAdd()}
         >
-          <Text style={styles.buttonText}>+</Text>
+          <Text style={styles.buttonText}>Avançar</Text>
         </TouchableOpacity>
       </View>
 
